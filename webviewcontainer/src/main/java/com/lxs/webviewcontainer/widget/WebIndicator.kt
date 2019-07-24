@@ -92,7 +92,8 @@ class WebIndicator : FrameLayout, BaseIndicatorSpec {
         var h = MeasureSpec.getSize(heightMeasureSpec)
 
         if (wMode == MeasureSpec.AT_MOST) {
-            w = if (w <= context.resources.displayMetrics.widthPixels) w else context.resources.displayMetrics.widthPixels
+            w =
+                if (w <= context.resources.displayMetrics.widthPixels) w else context.resources.displayMetrics.widthPixels
         }
         if (hMode == MeasureSpec.AT_MOST) {
             h = WEB_INDICATOR_DEFAULT_HEIGHT

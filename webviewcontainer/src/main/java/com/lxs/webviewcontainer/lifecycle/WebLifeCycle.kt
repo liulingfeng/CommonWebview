@@ -11,6 +11,6 @@ import android.view.KeyEvent
 interface WebLifeCycle {
     fun onResume()
     fun onPause()
-    fun onKeyDown(keyCode: Int, event: KeyEvent?):Boolean
+    fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean
     fun onDestroy()
 }

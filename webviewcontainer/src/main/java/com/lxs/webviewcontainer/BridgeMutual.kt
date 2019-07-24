@@ -15,7 +15,7 @@ class BridgeMutual constructor(bridgeWebView: BridgeWebView) : IMutual {
     override fun registerNativeMethod(methodName: String, returnData: String?, h5CallBack: H5CallBack) {
         bridgeWebView.get()?.registerHandler(methodName) { param, function ->
             h5CallBack.callBack(param)
-            if(returnData != null||"" != returnData){
+            if (returnData != null || "" != returnData) {
                 function.onCallBack(returnData)
             }
         }

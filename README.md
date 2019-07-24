@@ -5,7 +5,7 @@ jsbridge源码 https://github.com/lzyzsd/JsBridge </br>
 1.基于jsbridge，处理外部设置WebViewClient导致jsbridge失效的问题</br>
 2.隔离jsbridge的实现
 <h3>使用说明</h3>
-<pre>
+```
 interface WebApi {
     @H5ToNative(methodName = "submitFromWeb")
     fun submitFromWeb(@Field returnData: String, @CallBack h5CallBack: H5CallBack)
@@ -13,10 +13,10 @@ interface WebApi {
     @NativeToH5(methodName = "functionInJs")
     fun functionInJs(@Field responseData: String, @CallBack h5CallBack: H5CallBack)
 }
-</pre>
+```
 
 <h3>业务方调用</h3>
-<pre>
+```
  val webApi = H5Retrofit.getInstance(commonFragment?.getWebView()).create(WebApi::class.java)
  webApi?.functionInJs(Gson().toJson(user),object :H5CallBack{
        override fun callBack(data: String) {
@@ -28,5 +28,5 @@ interface WebApi {
            Log.e("德玛","h5返回参数$data")
           }
         })
-</pre>
+```
 

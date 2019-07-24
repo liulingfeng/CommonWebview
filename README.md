@@ -4,7 +4,7 @@ jsbridge源码 https://github.com/lzyzsd/JsBridge </br>
 
 1.基于jsbridge，处理外部设置WebViewClient导致jsbridge失效的问题</br>
 2.隔离jsbridge的实现
-3.<h3>使用说明</h3>
+<h3>使用说明</h3>
 <pre>
 interface WebApi {
     @H5ToNative(methodName = "submitFromWeb")

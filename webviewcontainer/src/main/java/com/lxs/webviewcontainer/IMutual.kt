@@ -8,7 +8,7 @@ package com.lxs.webviewcontainer
  */
 interface IMutual {
     //注册native方法
-    fun registerNativeMethod(methodName: String, returnData: String, h5CallBack: H5CallBack)
+    fun registerNativeMethod(methodName: String, returnData: String?, h5CallBack: H5CallBack)
 
     //调用h5方法
     fun callH5Method(methodName: String, data: String, h5CallBack: H5CallBack)

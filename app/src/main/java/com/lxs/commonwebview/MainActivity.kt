@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import com.google.gson.Gson
+import com.lxs.webviewcontainer.anntation.H5Retrofit
 import com.lxs.webviewcontainer.CommonWebViewFragment
 import com.lxs.webviewcontainer.H5CallBack
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,20 +20,18 @@ class MainActivity : AppCompatActivity() {
         commonFragment = fragment as CommonWebViewFragment
         commonFragment?.getWebView()?.loadUrl("file:///android_asset/demo.html")
 
-        commonFragment?.getWebView()?.registerNativeMethod(
-            "submitFromWeb",
-            "submitFromWeb exe, response data 中文 from Java",
-            object : H5CallBack {
-                override fun callBack(data: String) {
-                    Log.e("德玛返回值", data)
-                }
+        val user = User("刘小帅", 23)
 
-            })
-
-        val user = User("大头鬼", 23)
-        commonFragment?.getWebView()?.callH5Method("functionInJs", Gson().toJson(user), object : H5CallBack {
+        val webApi = H5Retrofit.getInstance(commonFragment?.getWebView()).create(WebApi::class.java)
+        webApi?.functionInJs(Gson().toJson(user),object :H5CallBack{
             override fun callBack(data: String) {
-                Log.e("德玛H5返回值", data)
+                Log.e("德玛","h5返回数据$data")
+            }
+
+        })
+        webApi?.submitFromWeb("submitFromWeb exe, response data 中文 from Java",object :H5CallBack{
+            override fun callBack(data: String) {
+                Log.e("德玛","h5返回参数$data")
             }
 
         })

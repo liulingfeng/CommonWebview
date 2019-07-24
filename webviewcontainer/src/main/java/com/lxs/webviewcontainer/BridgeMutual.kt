@@ -12,10 +12,12 @@ import java.lang.ref.WeakReference
 class BridgeMutual constructor(bridgeWebView: BridgeWebView) : IMutual {
     private var bridgeWebView: WeakReference<BridgeWebView> = WeakReference(bridgeWebView)
 
-    override fun registerNativeMethod(methodName: String, returnData: String, h5CallBack: H5CallBack) {
-        bridgeWebView.get()?.registerHandler(methodName) { data, function ->
-            h5CallBack.callBack(data)
-            function.onCallBack(returnData)
+    override fun registerNativeMethod(methodName: String, returnData: String?, h5CallBack: H5CallBack) {
+        bridgeWebView.get()?.registerHandler(methodName) { param, function ->
+            h5CallBack.callBack(param)
+            if(returnData != null||"" != returnData){
+                function.onCallBack(returnData)
+            }
         }
     }
 

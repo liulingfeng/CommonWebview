@@ -29,7 +29,7 @@ class CommonWebView : FrameLayout, IMutual {
     private var titleView: TextView? = null
     private var iMutual: IMutual? = null
 
-    override fun registerNativeMethod(methodName: String, returnData: String, h5CallBack: H5CallBack) {
+    override fun registerNativeMethod(methodName: String, returnData: String?, h5CallBack: H5CallBack) {
         iMutual?.registerNativeMethod(methodName, returnData, h5CallBack)
     }
 

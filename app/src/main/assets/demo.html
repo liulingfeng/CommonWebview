@@ -106,7 +106,7 @@
             bridge.registerHandler("functionInJs", function(data, responseCallback) {
                 document.getElementById("show").innerHTML = ("data from Java: = " + data);
                 if (responseCallback) {
-                    var responseData = "Javascript Says Right back aka!";
+                    var responseData = "把路由的值返给客户端";
                     responseCallback(responseData);
                 }
             });

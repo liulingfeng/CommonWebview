@@ -8,5 +8,4 @@ package com.lxs.webviewcontainer.anntation
  */
 @Target(AnnotationTarget.VALUE_PARAMETER)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class CallBack {
-}
+annotation class CallBack

@@ -8,5 +8,4 @@ package com.lxs.webviewcontainer.anntation
  */
 @Target(AnnotationTarget.FUNCTION)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class H5ToNative(val methodName: String) {
-}
+annotation class H5ToNative(val methodName: String)

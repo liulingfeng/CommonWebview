@@ -1,7 +1,6 @@
 package com.lxs.webviewcontainer
 
 import com.lxs.jsbridge.BridgeWebView
-import com.lxs.webviewcontainer.anntation.H5Retrofit
 import java.lang.ref.WeakReference
 
 /**

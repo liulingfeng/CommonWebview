@@ -9,5 +9,4 @@ package com.lxs.commonwebview
 data class User constructor(
     val name: String,
     val age: Int
-) {
-}
+)

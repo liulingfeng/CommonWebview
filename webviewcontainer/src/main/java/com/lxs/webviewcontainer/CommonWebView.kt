@@ -107,7 +107,7 @@ class CommonWebView : FrameLayout, IMutual {
         progressView = view?.findViewById(R.id.progress)
         progressView?.visibility = View.GONE
         bridgeWebView?.let {
-            iMutual = BridgeMutual(it)
+            iMutual = BridgeMutual.getInstance(it)
             webLifeCycle = DefaultWebLifeCycleImpl(it)
         }
         setWebChromeClient(null)

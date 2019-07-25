@@ -22,16 +22,16 @@ class MainActivity : AppCompatActivity() {
 
         val user = User("刘小帅", 23)
 
-        val webApi = H5Retrofit.getInstance(commonFragment?.getWebView()).create(WebApi::class.java)
-        webApi?.functionInJs(Gson().toJson(user),object :H5CallBack{
+        val webApi = H5Retrofit.getInstance(commonFragment?.getWebView())?.create(WebApi::class.java)
+        webApi?.functionInJs(Gson().toJson(user), object : H5CallBack {
             override fun callBack(data: String) {
-                Log.e("德玛","h5返回数据$data")
+                Log.e("德玛", "h5返回数据$data")
             }
 
         })
-        webApi?.submitFromWeb("submitFromWeb exe, response data 中文 from Java",object :H5CallBack{
+        webApi?.submitFromWeb("submitFromWeb exe, response data 中文 from Java", object : H5CallBack {
             override fun callBack(data: String) {
-                Log.e("德玛","h5返回参数$data")
+                Log.e("德玛", "h5返回参数$data")
             }
 
         })

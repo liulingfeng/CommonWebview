@@ -13,18 +13,19 @@ import java.lang.reflect.Proxy.newProxyInstance
  * @email liulingfeng@mistong.com
  */
 @Suppress("UNCHECKED_CAST")
-class H5Retrofit private constructor() {
+class H5Retrofit private constructor(commonWebView: CommonWebView?) {
+    private var weakWebView: WeakReference<CommonWebView?> = WeakReference(commonWebView)
 
+    //只在主线程调用
     companion object {
-        private var commonWebView: WeakReference<CommonWebView?>? = null
-        fun getInstance(commonWebView: CommonWebView?): H5Retrofit {
-            Companion.commonWebView = WeakReference(commonWebView)
-            return SingletonHolder.holder
-        }
-    }
+        private var instance: H5Retrofit? = null
 
-    private object SingletonHolder {
-        val holder = H5Retrofit()
+        fun getInstance(commonWebView: CommonWebView?): H5Retrofit? {
+            if(instance == null){
+                instance = H5Retrofit(commonWebView)
+            }
+            return instance
+        }
     }
 
     fun <T> create(service: Class<T>): T? {
@@ -39,7 +40,7 @@ class H5Retrofit private constructor() {
             annotations?.forEach {
                 when (it) {
                     is H5ToNative -> {
-                        commonWebView?.get()
+                        weakWebView.get()
                             ?.registerNativeMethod(it.methodName, getParam(method, args), object : H5CallBack {
                                 override fun callBack(data: String) {
                                     getCallBackParam(method, args)?.callBack(data)
@@ -48,7 +49,7 @@ class H5Retrofit private constructor() {
                             })
                     }
                     is NativeToH5 -> {
-                        commonWebView?.get()
+                        weakWebView.get()
                             ?.callH5Method(it.methodName, getParam(method, args), object : H5CallBack {
                                 override fun callBack(data: String) {
                                     getCallBackParam(method, args)?.callBack(data)

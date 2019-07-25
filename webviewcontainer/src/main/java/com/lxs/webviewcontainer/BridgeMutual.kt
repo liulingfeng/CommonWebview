@@ -1,6 +1,7 @@
 package com.lxs.webviewcontainer
 
 import com.lxs.jsbridge.BridgeWebView
+import com.lxs.webviewcontainer.anntation.H5Retrofit
 import java.lang.ref.WeakReference
 
 /**
@@ -9,8 +10,20 @@ import java.lang.ref.WeakReference
  * @desc
  * @email liulingfeng@mistong.com
  */
-class BridgeMutual constructor(bridgeWebView: BridgeWebView) : IMutual {
-    private var bridgeWebView: WeakReference<BridgeWebView> = WeakReference(bridgeWebView)
+class BridgeMutual private constructor(bridgeWebView: BridgeWebView?) : IMutual {
+    private var bridgeWebView: WeakReference<BridgeWebView?> = WeakReference(bridgeWebView)
+
+    //只在主线程调用
+    companion object {
+        private var instance: BridgeMutual? = null
+
+        fun getInstance(bridgeWebView: BridgeWebView?): BridgeMutual? {
+            if (instance == null) {
+                instance = BridgeMutual(bridgeWebView)
+            }
+            return instance
+        }
+    }
 
     override fun registerNativeMethod(methodName: String, returnData: String?, h5CallBack: H5CallBack) {
         bridgeWebView.get()?.registerHandler(methodName) { param, function ->
